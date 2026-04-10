@@ -1,0 +1,12 @@
+array(int)[10, 10] matriz1
+array(int)[10, 10] matriz2
+
+# Placeholder para inserção de valores nas matrizes
+
+array(int)[10, 10] res
+
+for i(0; 10; 1)
+    for j(0; 10; 1)
+        res[i, j] = matriz1[i, j] + matriz2[i, j]
+
+print(res)

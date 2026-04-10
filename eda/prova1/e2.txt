@@ -1,0 +1,23 @@
+function insert(deque, n, left, right, value, extremity)
+    if left < right then
+        amount_of_elements = right - left + 1
+    else
+        amount_of_elements = (n - left + 1) + right
+
+    if amount_of_elements == n then
+        print("O deque está cheio!")
+
+    else if amount_of_elements == 0 then
+        left = 0
+        right = 0
+        deque[0] = value
+
+    else
+        if extremity == 0 then
+            left = (left - 1 + n) % n
+            deque[left] = value
+        else
+            right = (right + 1) % n
+            deque[right] = value
+
+    return deque, left, right

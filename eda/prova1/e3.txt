@@ -1,0 +1,21 @@
+# input lista
+
+stack array[20] int
+
+function push(pilha, n, valor)
+    pilha[n] = valor
+    n = n + 1
+    return pilha, n
+
+function pop(pilha, n)
+    valor = pilha[n-1]
+    n = n - 1
+    return pilha, n, valor
+
+n = 1
+for i(1, 20, 1)
+    stack, n = push(stack, n, lista[i])
+
+for i(1, 20, 1)
+    stack, n, valor = pop(stack, n)
+    lista[i] = valor

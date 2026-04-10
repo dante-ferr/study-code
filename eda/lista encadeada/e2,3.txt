@@ -1,0 +1,34 @@
+# O(n), pois no pior caso o elemento a ser buscado encontra-se no final da lista, ou nem sequer existe
+function ordered_search(header, value)
+    ant = header
+    current_node = header.next
+
+    while current_node != lambda and current_node.value < value do
+        ant = current_node
+        current_node = current_node.next
+
+    return ant, current_node
+
+# O(n), pois no pior caso o elemento a ser adicionado é maior do que todos os outros, devendo ficar no final
+function ordered_insert(header, value)
+    ant, node = ordered_search(header, value)
+
+    if node == lambda or node.value > value then
+        new_node = new(node)
+        new_node.value = value
+        new_node.next = node
+        ant.next = new_node
+    
+    return header
+
+# O(n), pois no pior caso o elemento a ser excluído encontra-se no final da lista
+function ordered_exclude(header, value)
+    ant, node = ordered_search(header, value)
+
+    if node == lambda or node.value > value then
+        print("Valor não encontrado")
+    else
+        ant.next = node.next
+    
+    return header
+    

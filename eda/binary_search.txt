@@ -1,0 +1,17 @@
+function binary_search(array, n, object)
+    left = 0
+    right = n - 1
+    index = -1
+
+    while left <= right do
+        middle_index = (left + right) // 2
+        middle_value = array[middle_index]
+
+        if middle_value == object.priority then
+            index = middle_index
+        else if middle_value < object.priority then
+            left = middle + 1
+        else
+            right = middle - 1
+    
+    return index

@@ -1,0 +1,9 @@
+array(int)[10, 10] matriz
+
+# Placeholder para inserção de valores na matriz
+
+for i(0; 10; 1)
+    for j(0; 10; 1)
+        array[i, j] = array[i, j] * 2
+
+print(array)

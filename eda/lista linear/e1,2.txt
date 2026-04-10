@@ -1,0 +1,75 @@
+# Complexidade: O(n), pois no pior caso (o valor é maior que qualquer outro existente
+# na lista) a lista inteira (de tamanho n) deve ser percorrida.
+function incluir(lista, m, valor)
+    entrou = false
+    novo_m = m + 1
+
+    for i (0; m; 1)
+        if not entrou and lista[i] > valor then
+            entrou = true
+            
+            for j (m; i; -1)
+                lista[j] = lista[j-1]
+            
+            lista[i] = valor
+    
+    if not entrou then
+        lista[m] = valor
+    
+    return lista, novo_m
+
+# Complexidade: O(n), pois no pior caso (o valor encontra-se no final da lista) a
+# lista inteira (de tamanho n) deve ser percorrida.
+function excluir(lista, m, valor)
+    excluiu = false
+    novo_m = m - 1
+
+    for i (0; m; 1)
+        if lista[i] == valor then
+            excluiu = true
+            
+            for j (i; novo_m; 1)
+                lista[j] = lista[j+1]
+    
+    if not excluiu then
+        print("Valor não encontrado")
+        
+    return lista, novo_m
+
+# Complexidade: O(n), pois no pior caso (o valor encontra-se no final da lista) a
+# lista inteira (de tamanho n) deve ser percorrida.
+function busca_linear(lista, m, valor)
+    indice = -1
+
+    for i (0; m; 1)
+        if indice == -1 and lista[i] == valor then
+            indice = i
+    
+    return indice
+
+# Complexidade: O(log(n)), pois mesmo no pior caso a complexidade reduz-se pela metade
+# a cada passo.
+function busca_binaria(lista, m, valor)
+    indice = -1
+    inicio = 0
+    fim = m - 1
+
+    while indice == -1 and inicio <= fim do
+        meio = (inicio + fim) // 2
+
+        if lista[meio] == valor then
+            indice = meio
+        else if lista[meio] < valor then
+            inicio = meio + 1
+        else
+            fim = meio - 1
+    
+    return indice
+
+
+# M, VALOR1, VALOR2 e VALOR3 são parâmetros de entrada
+m = M
+array(int)[m] lista
+
+lista, m = incluir(lista, m, VALOR1)
+lista, m = excluir(lista, m, VALOR2)

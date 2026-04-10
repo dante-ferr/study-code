@@ -1,0 +1,55 @@
+# Complexidade: O(n²)
+# Input:
+- header: header node da lista encadeada desordenada e possivelmente com elementos repetidos
+
+class node
+    value int
+    next node
+
+function ordered_insert(header, value)
+    if header.next == lambda then
+        new_node = new(node)
+        new_node.value = value
+        new_node.next = lambda
+
+        header.next = new_node
+    else
+        ant = header
+        current_node = header.next
+
+        while current_node != lambda and current_node.value < value do
+            ant = current_node
+            current_node = current_node.next
+
+        if current_node == lambda then
+            new_node = new(node)
+            new_node.value = value
+            new_node.next = lambda
+
+            ant.next = new_node
+        
+        if current_node.value > value then
+            new_node = new(node)
+            new_node.value = value
+            
+            ant.next = new_node
+            new_node.next = current_node
+        
+        # Se current_node.value == value, nada acontece, evitando elementos repetidos
+    
+    return header
+
+n = 0
+ordered_list_header = node()
+ordered_list_header.value = lambda
+ordered_list_header.next = lambda
+
+if not header.next then
+    print("A lista está vazia")
+else
+    current_node = header.next
+
+    while current_node != lambda do
+        ordered_insert(ordered_list_header, current_node.value)
+
+        current_node = current_node.next

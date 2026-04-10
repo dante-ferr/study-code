@@ -1,0 +1,16 @@
+function bin_search(list, n, value)
+    res_index = -1
+    left = 1
+    right = n
+
+    while (res_index == -1 and left <= right)
+        middle = (right + left) // 2
+
+        if list[middle] == value then
+            res_index = middle
+        else if list[middle] < value then
+            left = middle + 1
+        else
+            right = middle - 1
+
+    return res_index

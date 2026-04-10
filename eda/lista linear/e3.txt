@@ -1,0 +1,29 @@
+# Complexidade: O(1), pois a inserção no topo de uma pilha com alocação
+# sequencial é uma operação de tempo constante.
+function push(pilha, m, valor)
+    pilha[m] = valor
+    m = m + 1
+    return pilha, m
+
+# Complexidade: O(1), pois a remoção do topo também é uma operação de
+# tempo constante.
+function pop(pilha, m)
+    valor = pilha[m-1]
+    m = m - 1
+    return pilha, m, valor
+
+# Complexidade: O(n). O algoritmo executa dois laços sequenciais, cada um
+# percorrendo os 'n' elementos da lista uma vez. A complexidade total é
+# O(n) + O(n) = O(2n), que em notação Big-O é simplificado para O(n).
+function inverter(lista, m)
+    n = 0
+    pilha array[n] int
+
+    for i (0; m; 1)
+        pilha, n = push(pilha, n, lista[i])
+    
+    for i (0; m; 1)
+        pilha, n, valor = pop(pilha, n)
+        lista[i] = valor
+
+    return lista, m

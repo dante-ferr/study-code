@@ -1,0 +1,37 @@
+function search(node, parent, value)
+    if value < node.value then
+        res_node, res_parent = search(node.left, node, value)
+    else if value > node.value then
+        res_node, res_parent = search(node.right, node, value)
+    else 
+        res_node = node
+        res_parent = parent
+
+    return res_node, res_parent
+
+function include(root, value)
+    node, parent = search(root, lambda, value)
+
+    if parent == lambda then
+        print("Erro! Árvore vazia!")
+    else if node == lambda then
+        new_node = new(Node)
+        new_node.value = value
+        new_node.left = lambda
+        new_node.right = lambda
+
+        if value < parent then
+            parent.left = new_node
+        else
+            parent.right = new_node
+    
+    return root
+
+# Execução principal
+# input: header, root
+
+list_node = header.next
+while list_node != lambda
+    root = include(root, list_node.value)
+
+    list_node = list_node.next

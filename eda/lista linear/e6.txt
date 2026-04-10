@@ -1,0 +1,8 @@
+function is_palindrome(array, n)
+    res = true
+
+    for i(0; n // 2; 1)
+        if array[i] != array[n - i - 1] then
+            res = false
+
+    return res

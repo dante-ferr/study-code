@@ -1,0 +1,10 @@
+function search_bin(root, value)
+    current_node = root
+
+    while current_node.value != value and current_node != lambda
+        if value < current_node.value then
+            current_node = current_node.left
+        else
+            current_node = current_node.right
+    
+    return current_node

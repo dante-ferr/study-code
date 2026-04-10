@@ -1,0 +1,16 @@
+array(int)[20] lista1
+
+# Placeholder para inserção de valores na lista
+
+array(int)[10] lista2
+array(int)[10] lista3
+
+for i(0; 10; 1)
+    lista2[i] = lista1[i]
+    lista3[i] = lista1[i + 10]
+
+print(lista1)
+print(lista2)
+print(lista3)
+
+# lista1 array[20] int

@@ -1,0 +1,24 @@
+function iterate_over_tree(root)
+    stack1 = new(stack)
+    stack2 = new(stack)
+
+    current_node = root
+
+    while current_node != lambda
+        stack2.push(current_node)
+
+        if current_node.left != lambda then
+            stack1.push(current_node.left)
+        
+        if current_node.right != lambda then
+            stack1.push(current_node.right)
+
+        current_node = stack1.pop()
+    
+    op_node = stack2.pop()
+    while op_node != lambda
+        # Fazer qualquer operação
+        
+        current_node = stack2.pop()
+    
+    return root

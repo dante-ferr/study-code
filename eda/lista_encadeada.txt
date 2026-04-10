@@ -1,0 +1,59 @@
+function search(list, value)
+    // Start at the beginning of the list
+    current = list.head
+
+    // Traverse the list until the end is reached
+    while current != null do
+        if current.data == value then
+            // Found the node, return it
+            return current
+        
+        // Move to the next node
+        current = current.next
+
+    // The value was not found in the list
+    return null
+
+function inclusion(list, value)
+    // Create the new node to be inserted
+    new_node = create_node(value)
+
+    // Case 1: The list is empty or the new node goes at the beginning
+    if list.head == null or list.head.data >= value then
+        new_node.next = list.head
+        list.head = new_node
+        return
+
+    // Case 2: Find the correct position to insert the node
+    current = list.head
+    
+    // Traverse to find the node that should be *before* the new node
+    while current.next != null and current.next.data < value do
+        current = current.next
+
+    // Insert the new node after the current one
+    new_node.next = current.next
+    current.next = new_node
+
+function exclusion(list, value)
+    current = list.head
+    previous = null
+
+    // Traverse the list to find the node to delete
+    while current != null and current.data != value do
+        previous = current
+        current = current.next
+
+    // If current is null, the value was not found
+    if current == null then
+        return false
+
+    // Unlink the node from the list
+    if previous == null then
+        // The node to delete is the head of the list
+        list.head = current.next
+    else
+        // The node to delete is in the middle or at the end
+        previous.next = current.next
+
+    return true

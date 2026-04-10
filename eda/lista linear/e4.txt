@@ -1,0 +1,31 @@
+# Complexidade: O(1), pois a inserção em qualquer uma das extremidades
+# de um deque implementado com array circular é uma operação de tempo constante.
+function inserir_no_deque(deque, n, left, right, value, extremity)
+    # Calcula o número de elementos. Se right < left, é um caso de "wrap-around".
+    # Se right == -1, o deque está vazio.
+    
+    num_elementos = 0
+    if right != -1 then
+        if right >= left then
+            num_elementos = right - left + 1
+        else
+            num_elementos = (n - left) + (right + 1)
+
+    # Verifica se o deque está cheio
+    if num_elementos == n then
+        print("O deque está cheio!")
+
+    else if num_elementos == 0 then
+        left = 0
+        right = 0
+        deque[0] = value
+
+    else # O deque tem entre 0 e n elementos
+        if extremity == 0 then
+            left = (left - 1 + n) % n
+            deque[left] = value
+        else
+            right = (right + 1) % n
+            deque[right] = value
+
+    return deque, left, right

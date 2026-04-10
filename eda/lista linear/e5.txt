@@ -1,0 +1,19 @@
+# Complexidade: O(n)
+function include(queue, n, object)
+    pos = n
+    while pos > 0 and queue[pos - 1].priority < object.priority
+        pos = pos - 1
+
+    for i (n - 1; pos; -1) # Consider pos included
+        queue[i + 1] = queue[i]
+    
+    queue[pos] = object
+    n += 1
+    
+    return queue, n
+
+function exclude(queue, n)
+    for i(0; n - 1; 1)
+        queue[i] = queue[i + 1]
+
+    return queue, n - 1
