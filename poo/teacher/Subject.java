@@ -1,4 +1,4 @@
-package teaher;
+package teacher;
 
 public class Subject {
     private String name;

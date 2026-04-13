@@ -1,4 +1,4 @@
-package teaher;
+package teacher;
 
 import java.util.ArrayList;
 
