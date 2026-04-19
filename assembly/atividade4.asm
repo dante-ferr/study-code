@@ -15,19 +15,26 @@
     NOP
 
 Principal:
-    SBIC PIND,BOTAO
+    SBIS PIND,BOTAO_INC
+    RJMP Esp_Soltar_Inc
+
+    SBIS PIND,BOTAO_DEC
+    RJMP Esp_Soltar_Dec
+
     RJMP Principal
 
-Esp_Soltar:
-    SBIS PIND,BOTAO
+Esp_Soltar_Inc:
+    SBIS PIND,BOTAO_INC
     RJMP Esp_Soltar
-    ; RCALL Atraso
 
     SBIC PORTD,LED
     RJMP Inc
 
     SBI PORTD,LED
     RJMP Principal
+
+    ; RCALL Atraso
+    RJMP Esp_Soltar_Inc
 
 Inc:
     OUT PORTD, R16
