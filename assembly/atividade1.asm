@@ -19,7 +19,6 @@ PRINCIPAL:
     RJMP PRINCIPAL
 
 ATRASO:
-
 volta:
     DEC R17
     BRNE volta
