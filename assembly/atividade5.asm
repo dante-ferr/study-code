@@ -43,7 +43,7 @@ Esp_Soltar_Inc:
 
 Incr:
     INC CONTADOR
-    MOV AUX, CONTADOR
+    
     RJMP check_0
 
 Esp_Soltar_Dec:
@@ -56,7 +56,6 @@ Esp_Soltar_Dec:
 
 Decr:
     DEC CONTADOR
-    MOV AUX, CONTADOR
     RJMP check_0
     
 Atualizar_leds:
@@ -72,6 +71,9 @@ Atraso:
 
 
 check_0:
+    MOV AUX, CONTADOR
+    ANDI AUX, 0b00001111
+
     CPI AUX, 0x00
     BRNE check_1
     LDI AUX, 0b00111111
