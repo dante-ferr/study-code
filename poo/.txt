@@ -1,8 +1,0 @@
-for (var entry : map.EntrySet()) {
-    entry.getKey()
-    entry.getValue()
-}
-
-map.forEach((key, value) -> {
-
-})
