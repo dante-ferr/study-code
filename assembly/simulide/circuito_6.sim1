@@ -1,0 +1,61 @@
+<circuit version="1.1.0-SR2" rev="260327" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="MCU" CircId="mega328-1" mainComp="false" Show_id="true" Show_Val="false" Pos="44,-108" rotation="0" hflip="1" vflip="1" label="mega328-1" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="../atividade6.hex" Auto_Load="false" saveEepr="true" Logic_Symbol="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" MainMcu="true" SerialMon="-1" />
+
+<item itemtype="Ground" CircId="Ground-2" mainComp="false" Show_id="false" Show_Val="false" Pos="-20,28" rotation="0" hflip="1" vflip="1" label="Ground-2" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+
+<item itemtype="Seven Segment" CircId="Seven Segment-3" mainComp="false" Show_id="false" Show_Val="false" Pos="308,-216" rotation="0" hflip="1" vflip="1" label="Seven Segment-3" idLabPos="20,-44" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" NumDisplays="1" Vertical_Pins="false" CommonCathode="true" Threshold="2.4 V" MaxCurrent="20 mA" Resistance="1 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-5" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-260" rotation="0" hflip="1" vflip="1" label="Resistor-5" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-7" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-240" rotation="0" hflip="1" vflip="1" label="Resistor-7" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-8" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-220" rotation="0" hflip="1" vflip="1" label="Resistor-8" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-9" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-200" rotation="0" hflip="1" vflip="1" label="Resistor-9" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-10" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-180" rotation="0" hflip="1" vflip="1" label="Resistor-10" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-11" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-160" rotation="0" hflip="1" vflip="1" label="Resistor-11" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-12" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="156,-140" rotation="0" hflip="1" vflip="1" label="Resistor-12" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Ground" CircId="Ground-14" mainComp="false" Show_id="false" Show_Val="false" Pos="316,-148" rotation="0" hflip="1" vflip="1" label="Ground-14" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+
+<item itemtype="Push" CircId="Push-16" mainComp="false" Show_id="false" Show_Val="false" Pos="12,4" rotation="0" hflip="1" vflip="1" label="Push-16" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Connector" uid="Connector-30" startpinid="Resistor-5-lPin" endpinid="mega328-1-PORTD0" pointList="140,-260,28,-260,28,-92,36,-92" />
+
+<item itemtype="Connector" uid="Connector-31" startpinid="Resistor-7-lPin" endpinid="mega328-1-PORTD1" pointList="140,-240,20,-240,20,-84,36,-84" />
+
+<item itemtype="Connector" uid="Connector-32" startpinid="Resistor-8-lPin" endpinid="mega328-1-PORTD2" pointList="140,-220,12,-220,12,-76,36,-76" />
+
+<item itemtype="Connector" uid="Connector-33" startpinid="Resistor-9-lPin" endpinid="mega328-1-PORTD3" pointList="140,-200,4,-200,4,-68,36,-68" />
+
+<item itemtype="Connector" uid="Connector-34" startpinid="Resistor-10-lPin" endpinid="mega328-1-PORTD4" pointList="140,-180,-4,-180,-4,-60,36,-60" />
+
+<item itemtype="Connector" uid="Connector-35" startpinid="Resistor-11-lPin" endpinid="mega328-1-PORTD5" pointList="140,-160,-12,-160,-12,-20,36,-20" />
+
+<item itemtype="Connector" uid="Connector-36" startpinid="Resistor-12-lPin" endpinid="mega328-1-PORTD6" pointList="140,-140,-20,-140,-20,-12,36,-12" />
+
+<item itemtype="Connector" uid="Connector-37" startpinid="Ground-14-Gnd" endpinid="Seven Segment-3-pin_commona" pointList="316,-164,316,-184" />
+
+<item itemtype="Connector" uid="Connector-42" startpinid="mega328-1-PORTB0" endpinid="Push-16-switch0pinN" pointList="36,4,28,4" />
+
+<item itemtype="Connector" uid="Connector-43" startpinid="Push-16-pinP0" endpinid="Ground-2-Gnd" pointList="-4,4,-20,4,-20,12" />
+
+<item itemtype="Connector" uid="Connector-77" startpinid="Resistor-10-rPin" endpinid="Seven Segment-3-pin_e" pointList="172,-180,200,-180,200,-208,284,-208" />
+
+<item itemtype="Connector" uid="Connector-78" startpinid="Resistor-9-rPin" endpinid="Seven Segment-3-pin_d" pointList="172,-200,192,-200,192,-216,284,-216" />
+
+<item itemtype="Connector" uid="Connector-79" startpinid="Resistor-11-rPin" endpinid="Seven Segment-3-pin_f" pointList="172,-160,208,-160,208,-200,284,-200" />
+
+<item itemtype="Connector" uid="Connector-80" startpinid="Resistor-12-rPin" endpinid="Seven Segment-3-pin_g" pointList="172,-140,216,-140,216,-192,284,-192" />
+
+<item itemtype="Connector" uid="Connector-81" startpinid="Resistor-5-rPin" endpinid="Seven Segment-3-pin_a" pointList="172,-260,216,-260,216,-240,284,-240" />
+
+<item itemtype="Connector" uid="Connector-82" startpinid="Resistor-7-rPin" endpinid="Seven Segment-3-pin_b" pointList="172,-240,208,-240,208,-232,284,-232" />
+
+<item itemtype="Connector" uid="Connector-83" startpinid="Resistor-8-rPin" endpinid="Seven Segment-3-pin_c" pointList="172,-220,184,-220,184,-224,284,-224" />
+
+</circuit>
