@@ -1,0 +1,344 @@
+O monitor passou esta resolução para o contador que o professor passou como desafio (atividade5):
+; --- Diretivas Padrão do Assembly ---
+.nolist ; Isto não será incluído no arquivo resultante da compilação (.hex)
+.include "m328Pdef.inc" ; Arquivo de compilação para o ATMEGA328P (utilizado nas práticas)
+.list ; Isto será incluído no arquivo resultante da compilação (.hex)
+
+; --- Macros para Definição dos Registradores e Pinos do ATMEGA ---
+.equ DISPLAY = PORTB ; O display de 7 segmentos está no PORTB, logo utilizamos um macro para referenciá-lo
+.equ BOTAO_CRESCENTE = PD0 ; O botão de contagem crescente está em PD0, logo, utilizamos um macro para referenciá-lo
+.equ BOTAO_DECRESCENTE = PD1 ; O botão de contagem decrescente está em PD1, logo, utilizamos um macro para referenciá-lo
+.def AUX = R16 ; Definimos R16 como sendo nosso registrador auxiliar
+.def COUNTER = R17 ; Definimos R17 como sendo nosso contador
+.def DIRECAO = R18 ; Definimos R18 como a flag de contagem: 0 para crescente e 1 para decrescente
+
+; --- Endereço do Início do Programa (0x000 por padrão) ---
+.ORG 0x000
+
+; --- Todas as Inicializações de Registradores e Portas ---
+Inicializacoes:
+    LDI AUX, 0xFF ; Definimos quais bits do PORTB serão input e quais serão output (1 para output e 0 para input)
+    OUT DDRB, AUX ; Atribuímos a definição dos bits ao registradore DDRB
+	LDI AUX, 0x00 ; Definimos quais bits do PORTD serão input e quais serão output (1 para output e 0 para input)
+    OUT DDRD, AUX ; Atribuímos a definição dos bits ao registradore DDRD
+	LDI AUX, 0b00000011 ; Ativamos o pull-up nas portas que contém os botões, e desativamos as demais
+	OUT PORTD, AUX ; Atribuímos a definição anterior ao registrador PORTD para confirmar o sistema
+    LDI COUNTER, 0 ; Inicializamos o contador em 0
+
+; --- Aguardando o Botão Ser Pressionado pela Primeira Vez ---
+Esperar_Botao:
+	SBIS PIND, BOTAO_CRESCENTE ; Se o botão de contagem crescente for pressionado, define-se a contagem crescente
+	RJMP Definir_Contagem_Crescente ; Avança para a rotina de contagem crescente
+	SBIS PIND, BOTAO_DECRESCENTE ; Se o botão de contagem decrescente for pressionado, define-se a contagem decrescente
+	RJMP Definir_Contagem_Decrescente ; Avança para a rotina de contagem decrescente
+	RJMP Esperar_Botao ; Caso nenhum botão tenha sido pressionado, mantêm esta rotina em loop
+
+; --- Definição da Contagem Crescente ---
+Definir_Contagem_Crescente:
+	LDI DIRECAO, 0 ; Define a flag de contagem como crescente (0)
+	RJMP Principal ; Avança para a rotina principal
+
+; --- Definição da Contagem Decrescente ---
+Definir_Contagem_Decrescente:
+	LDI DIRECAO, 1 ; Define a flag de contagem como decrescente (1)
+
+; --- Rotina Principal ---
+Principal:
+	; --- Verificação de Pressionamento do Botão de Contagem Crescente ---
+	Verificar_Crescente:
+	SBIC PIND, BOTAO_CRESCENTE ; Se o botão de contagem crescente for pressionado, altera-se para a contagem crescente
+	RJMP Verificar_Decrescente ; Caso o botão não tenha sido pressionado, avança para a próxima verificação
+	LDI DIRECAO, 0 ; Altera a flag de contagem para crescente (0)
+	RJMP Verificar_Contador ; Avança para a rotina de verificação da contagem atual
+
+	; --- Verificação de Pressionamento do Botão de Contagem Decrescente ---
+	Verificar_Decrescente:
+	SBIC PIND, BOTAO_DECRESCENTE ; Se o botão de contagem decrescente for pressionado, altera-se para a contagem decrescente
+	RJMP Verificar_Contador ; Avança para a rotina de verificação da contagem atual
+	LDI DIRECAO, 1 ; Altera a flag de contagem para decrescente (1)
+
+	; --- "Switch-case" para Tratar Cada Valor de Contagem ---
+	Verificar_Contador:
+	CPI COUNTER, 0 ; Case 0
+	BREQ Case_0
+	CPI COUNTER, 1 ; Case 1
+	BREQ Case_1
+	CPI COUNTER, 2 ; Case 2
+	BREQ Case_2
+	CPI COUNTER, 3 ; Case 3
+	BREQ Case_3
+	CPI COUNTER, 4 ; Case 4
+	BREQ Case_4
+	CPI COUNTER, 5 ; Case 5
+	BREQ Case_5
+	CPI COUNTER, 6 ; Case 6
+	BREQ Case_6
+	CPI COUNTER, 7 ; Case 7
+	BREQ Case_7
+	CPI COUNTER, 8 ; Case 8
+	BREQ Case_8
+	RJMP Case_9 ; Case 9
+
+	; --- Envio ao Display do Padrão Referente ao 0 ---
+	Case_0:
+    LDI AUX, 0b0111111 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 1 ---
+	Case_1:
+    LDI AUX, 0b0000110 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 2 ---
+	Case_2:
+    LDI AUX, 0b1011011 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 3 ---
+	Case_3:
+    LDI AUX, 0b1001111 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 4 ---
+	Case_4:
+    LDI AUX, 0b1100110 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 5 ---
+	Case_5:
+    LDI AUX, 0b1101101 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 6 ---
+	Case_6:
+    LDI AUX, 0b1111101 ; Colocamos no registrador auxiliar o padrão do display
+	RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 7 ---
+	Case_7:
+    LDI AUX, 0b0000111 ; Colocamos no registrador auxiliar o padrão do display
+	RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 8 ---
+	Case_8:
+    LDI AUX, 0b1111111 ; Colocamos no registrador auxiliar o padrão do display
+    RJMP Sincronizar_Display ; Avançamos para a rotina de exibição da contagem no display
+
+	; --- Envio ao Display do Padrão Referente ao 9 ---
+	Case_9:
+    LDI AUX, 0b1101111 ; Colocamos no registrador auxiliar o padrão do display
+
+	; --- Rotina de Decodificação: Exibe a Contagem Atual do Display ---
+	Sincronizar_Display:
+	OUT DISPLAY, AUX ; Enviamos o padrão correspondente para o display
+	RCALL Atraso ; Chamamos a sub-rotina de atraso
+	
+	; Definição da Forma de Atualização do Contador
+	CPI DIRECAO, 0 ; Verifica se o flag de contagem é crescente (0)
+	BREQ Contador_Crescente ; Se sim, chama a sub-rotina de contagem crescente
+	RJMP Contador_Decrescente ; Se não, chama a sub-rotina de contagem decrescente
+
+	; --- Contagem Crescente ---
+	Contador_Crescente:
+	INC COUNTER ; Incrementa o contador em 1 unidade
+	CPI COUNTER, 10 ; Verifica se o contador excedeu a contagem máxima (10)
+	BRNE Principal ; Se não excedeu, retorna para a rotina principal para recomeçar o ciclo
+	LDI COUNTER, 0 ; Se excedeu, atribui 0 ao contador
+	RJMP Principal ; Retorna para a rotina principal para recomeçar o ciclo
+
+	; --- Contagem Decrescente
+	Contador_Decrescente:
+	DEC COUNTER ; Decrementa o contador em 1 unidade
+	BRPL Principal ; Se o contador ainda for um valor maior ou igual que 0, retorna para a rotina principal para recomeçar o ciclo
+	LDI COUNTER, 9 ; Caso contrário, atribui 9 ao contador
+	RJMP Principal ; Retorna para a rotina principal para recomeçar o ciclo
+
+; Sub-rotina de Atraso (para que se tenha um delay na atualização)
+Atraso:
+    LDI R21, 18 ; Valor de atraso definido para acelerar a contagem
+
+    Volta:
+    DEC R19 ; Decrementa o valor do 1º loop aninhado
+    BRNE Volta ; Se for maior ou igual a 0, vai para a próxima iteração
+    DEC R20 ; Decrementa o valor do 2º loop aninhado
+    BRNE Volta ; Se for maior ou igual a 0, vai para a próxima iteração
+    DEC R21 ; Decrementa o valor do 3º loop aninhado
+    BRNE Volta ; Se for maior ou igual a 0, vai para a próxima iteração
+    RET ; Retorna para a rotina que chamou o atraso
+
+Minha resolução é:
+.nolist
+.include "m328Pdef.inc"
+.list
+
+.equ BOTAO_INC = PD4
+.equ BOTAO_DEC = PD5
+
+.def CONTADOR  = R17
+.def AUX       = R16
+
+.ORG 0x000
+    LDI AUX,0b00000000
+    OUT DDRD,AUX
+
+    LDI AUX,0b11111111
+    OUT PORTD, AUX
+
+    LDI AUX,0b11111111
+    OUT DDRB,AUX
+
+    LDI AUX,0b00000000
+    OUT PORTB, AUX
+
+    CLR CONTADOR
+    NOP
+
+Principal:
+    SBIS PIND,BOTAO_INC
+    RJMP Esp_Soltar_Inc
+
+    SBIS PIND,BOTAO_DEC
+    RJMP Esp_Soltar_Dec
+
+    RJMP Principal
+
+Esp_Soltar_Inc:
+    SBIC PIND,BOTAO_INC
+    RJMP Incr
+
+    RCALL Atraso
+
+    RJMP Esp_Soltar_inc
+
+Incr:
+    INC CONTADOR
+    
+    RJMP check_0
+
+Esp_Soltar_Dec:
+    SBIC PIND,BOTAO_DEC
+    RJMP Decr
+
+    RCALL Atraso
+
+    RJMP Esp_Soltar_Dec
+
+Decr:
+    DEC CONTADOR
+    RJMP check_0
+    
+Atualizar_leds:
+    OUT PORTB, AUX    
+    RJMP Principal
+
+Atraso:
+    DEC R3
+    BRNE Atraso
+    DEC R2
+    BRNE Atraso
+    RET
+
+
+check_0:
+    MOV AUX, CONTADOR
+    ANDI AUX, 0b00001111
+
+    CPI AUX, 0x00
+    BRNE check_1
+    LDI AUX, 0b00111111
+    RJMP Atualizar_leds
+
+check_1:
+    CPI AUX, 0x01
+    BRNE check_2
+    LDI AUX, 0b00000110
+    RJMP Atualizar_leds
+
+check_2:
+    CPI AUX, 0x02
+    BRNE check_3
+    LDI AUX, 0b01011011
+    RJMP Atualizar_leds
+
+check_3:
+    CPI AUX, 0x03
+    BRNE check_4
+    LDI AUX, 0b01001111
+    RJMP Atualizar_leds
+
+check_4:
+    CPI AUX, 0x04
+    BRNE check_5
+    LDI AUX, 0b01100110
+    RJMP Atualizar_leds
+
+check_5:
+    CPI AUX, 0x05
+    BRNE check_6
+    LDI AUX, 0b01101101
+    RJMP Atualizar_leds
+
+check_6:
+    CPI AUX, 0x06
+    BRNE check_7
+    LDI AUX, 0b01111101
+    RJMP Atualizar_leds
+
+check_7:
+    CPI AUX, 0x07
+    BRNE check_8
+    LDI AUX, 0b00000111
+    RJMP Atualizar_leds
+
+check_8:
+    CPI AUX, 0x08
+    BRNE check_9
+    LDI AUX, 0b01111111
+    RJMP Atualizar_leds
+
+check_9:
+    CPI AUX, 0x09
+    BRNE check_A
+    LDI AUX, 0b01101111
+    RJMP Atualizar_leds
+
+check_A:
+    CPI AUX, 0x0A
+    BRNE check_B
+    LDI AUX, 0b01110111
+    RJMP Atualizar_leds
+
+check_B:
+    CPI AUX, 0x0B
+    BRNE check_C
+    LDI AUX, 0b01111100
+    RJMP Atualizar_leds
+
+check_C:
+    CPI AUX, 0x0C
+    BRNE check_D
+    LDI AUX, 0b00111001
+    RJMP Atualizar_leds
+
+check_D:
+    CPI AUX, 0x0D
+    BRNE check_E
+    LDI AUX, 0b01011110
+    RJMP Atualizar_leds
+
+check_E:
+    CPI AUX, 0x0E
+    BRNE check_F
+    LDI AUX, 0b01111001
+    RJMP Atualizar_leds
+
+check_F:
+    CPI AUX, 0x0F
+    BRNE unknown
+    LDI AUX, 0b01110001
+    RJMP Atualizar_leds
+
+unknown:
+    ldi AUX, 0x00
+
+Cite as diferenças. Tem diferença quanto ao ânodo ou cátodo comum? Quando o professor pedir "estrutura similar ao switch", pode ser de ambos os jeitos?

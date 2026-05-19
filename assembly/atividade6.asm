@@ -1,3 +1,5 @@
+; Prática 4
+
 .nolist
 .include "m328Pdef.inc"
 .list
@@ -12,11 +14,11 @@ Inicializacoes:
     LDI AUX, 0b11111110
     OUT DDRB, AUX
     LDI AUX, 0xFF
-    OUT PORTB, AUX
     OUT DDRD, AUX
-    OUT PORTD, AUX
+    OUT PORTB, AUX
 
-    STS UCSR0B, R1
+    LDI AUX, 0x00
+    RJMP Decod
 
 Principal:
     SBIC PINB, BOTAO
@@ -39,11 +41,11 @@ Decod:
 Atraso:
     LDI R19, 16
 volta:
-    DEC R17
+    DEC R20
     BRNE volta
-    DEC R18
+    DEC R21
     BRNE volta
-    DEC R19
+    DEC R22
     BRNE volta
     RET
 

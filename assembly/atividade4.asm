@@ -1,3 +1,5 @@
+; Prática 2
+
 .nolist
 .include "m328Pdef.inc"
 .list
@@ -55,6 +57,7 @@ Decr:
     
 Atualizar_leds:
     MOV AUX, CONTADOR
+    COM AUX
     ORI AUX, PULLUPS
     OUT PORTD, AUX
     
