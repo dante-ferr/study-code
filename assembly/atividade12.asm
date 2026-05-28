@@ -2,9 +2,11 @@
 .include "m328Pdef.inc"
 .list
 
-.equ DISP_PORT = PORTD
+.equ DISP_PORT_1 = PORTD
+.equ DISP_PORT_2 = PORTB
 
 .def AUX = R16
+.def RES = R20
 
 .ORG 0x0000
     RJMP Setup
@@ -12,9 +14,10 @@
 Setup:
     LDI AUX, 0xFF
     OUT DDRD, AUX
+    OUT DDRB, AUX
 
-    LDI R17, 1
-    LDI R18, 2
+    LDI R17, 6
+    LDI R18, 8
 
 Main:
     LDI AUX, 10
@@ -31,16 +34,27 @@ Main:
 No_Carry2:
     LPM AUX, Z
 
-Update_Display:
+    MOV R19, AUX
+    RCALL Search
+    OUT DISP_PORT_1, RES
+
+    MOV R19, AUX
+    SWAP R19
+    RCALL Search
+    OUT DISP_PORT_2, RES
+
+Search:
+    ANDI R19, 0x0F
+
     LDI ZH, HIGH(Display_Table << 1)
     LDI ZL, LOW(Display_Table << 1)
     
-    ADD ZL, AUX
+    ADD ZL, R19
     BRCC No_Carry
     INC ZH
 No_Carry:
-    LPM AUX, Z
-    OUT DISP_PORT, AUX
+    LPM RES, Z
+    RET
 
 Matrix:
     .db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
