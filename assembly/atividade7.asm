@@ -68,6 +68,7 @@ Decodifica:
 Busca_Tabela:
     LDI ZH, HIGH(Tabela<<1)
     LDI ZL, LOW(Tabela<<1)
+    
     ANDI BUX, 0x0F
     ADD ZL, BUX
     BRCC le_tab
